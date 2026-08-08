@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Disparo
   velocidad: 15
+  rocaChica: {fileID: 5729430406290179959, guid: b0fbc874cc36f1ad09ffbca79be34c2e, type: 3}
+  rocaMediana: {fileID: 4346593421373467822, guid: b73bc78689eb112b7b29ae1d3c4da5ce, type: 3}
 --- !u!58 &4424655999771979359
 CircleCollider2D:
   m_ObjectHideFlags: 0

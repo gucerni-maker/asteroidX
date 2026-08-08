@@ -7,6 +7,9 @@ TagManager:
   - roca
   - pared
   - bala
+  - rocaChica
+  - rocaMediana
+  - rocaGrande
   layers:
   - Default
   - TransparentFX

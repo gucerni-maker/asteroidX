@@ -41,7 +41,11 @@ public class PlayerMove : MonoBehaviour
 
     //Se destruye la nave si choca con una roca
     void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject.CompareTag("roca")){
+        if (collision.gameObject.CompareTag("rocaChica") || collision.gameObject.CompareTag("rocaMediana") || collision.gameObject.CompareTag("rocaGrande")){
+            Destroy(gameObject);
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+        }
+        if (collision.gameObject.CompareTag("pared")){
             Destroy(gameObject);
             Instantiate(explosionEffect, transform.position, transform.rotation);
         }
