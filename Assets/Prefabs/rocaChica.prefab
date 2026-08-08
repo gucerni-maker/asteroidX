@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3568544779061493233}
   m_Layer: 0
   m_Name: rocaChica
-  m_TagString: Untagged
+  m_TagString: roca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
