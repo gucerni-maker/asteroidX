@@ -4,7 +4,7 @@ public class EnemigoMove : MonoBehaviour
 {
     private float minSpeed = 1f;
     private float maxSpeed = 3f;
-    //private float velocidad = 5f;
+    public GameObject explosionEffect;
 
     Rigidbody2D rb;
 
@@ -29,5 +29,13 @@ public class EnemigoMove : MonoBehaviour
         float rad = angulo * Mathf.Deg2Rad;
         Vector2 direccion = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
         rb.linearVelocity = direccion * randomSpeed;
+    }
+
+    //Se destruye la roca si choca con una bala
+    void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("bala")){
+            Destroy(gameObject);
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+        }
     }
 }

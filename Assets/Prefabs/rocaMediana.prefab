@@ -169,3 +169,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf903cc24f38683649e25591e29a58fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemigoMove
+  explosionEffect: {fileID: 1638405744228947977, guid: aba9167c618a36d27bfe660bd9101a61, type: 3}

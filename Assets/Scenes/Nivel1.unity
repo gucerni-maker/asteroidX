@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 99357077}
   m_Layer: 0
   m_Name: arriba
-  m_TagString: Untagged
+  m_TagString: pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,6 +257,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &178292357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178292358}
+  m_Layer: 0
+  m_Name: puntoDisparo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &178292358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178292357}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0007854348, y: -0, z: -0, w: 0.9999997}
+  m_LocalPosition: {x: 0, y: 0.70724773, z: -0.0011624432}
+  m_LocalScale: {x: 1.3635125, y: 0.9557414, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 508102660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &508102656
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +456,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7334, y: 1.0463083, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 178292358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.09, y: 0, z: 0}
 --- !u!114 &508102661
@@ -444,6 +476,8 @@ MonoBehaviour:
   velocidadMaxima: 10
   velocidadRotacion: 200
   explosionEffect: {fileID: 1638405744228947977, guid: aba9167c618a36d27bfe660bd9101a61, type: 3}
+  balaPrefab: {fileID: 515803524015411784, guid: 672d02b07d7c0702aa369ea6074338c5, type: 3}
+  puntoDisparo: {fileID: 178292358}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +712,7 @@ GameObject:
   - component: {fileID: 1062910171}
   m_Layer: 0
   m_Name: abajo
-  m_TagString: Untagged
+  m_TagString: pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,7 +850,7 @@ GameObject:
   - component: {fileID: 1404654934}
   m_Layer: 0
   m_Name: izquierda
-  m_TagString: Untagged
+  m_TagString: pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,7 +1035,7 @@ GameObject:
   - component: {fileID: 1825352904}
   m_Layer: 0
   m_Name: derecha
-  m_TagString: Untagged
+  m_TagString: pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
