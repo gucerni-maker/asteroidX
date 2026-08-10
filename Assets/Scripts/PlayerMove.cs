@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,11 +10,18 @@ public class PlayerMove : MonoBehaviour
     public GameObject explosionEffect;
     public GameObject balaPrefab;
     public Transform puntoDisparo;
-    
+    private Collider2D colision;
+    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+
+    void Awake(){
+        rb = GetComponent<Rigidbody2D>();
+        colision = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     
     void Start(){
-      rb = GetComponent<Rigidbody2D>();
+
     }
 
     void Update(){
@@ -41,13 +49,15 @@ public class PlayerMove : MonoBehaviour
 
     //Se destruye la nave si choca con una roca
     void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject.CompareTag("rocaChica") || collision.gameObject.CompareTag("rocaMediana") || collision.gameObject.CompareTag("rocaGrande")){
-            Destroy(gameObject);
-            Instantiate(explosionEffect, transform.position, transform.rotation);
-        }
-        if (collision.gameObject.CompareTag("pared")){
-            Destroy(gameObject);
-            Instantiate(explosionEffect, transform.position, transform.rotation);
+        if (collision.gameObject.CompareTag("rocaChica") ||
+            collision.gameObject.CompareTag("rocaMediana") ||
+            collision.gameObject.CompareTag("rocaGrande") ||
+            collision.gameObject.CompareTag("pared")){
+
+                GameManager gm = FindFirstObjectByType<GameManager>();
+                gm.RestaVida();
+                Instantiate(explosionEffect, transform.position, transform.rotation);
+                Destroy(gameObject);
         }
     }
 
@@ -55,5 +65,23 @@ public class PlayerMove : MonoBehaviour
     void Disparar(){
         Instantiate(balaPrefab, puntoDisparo.position, transform.rotation);
     }
+
+    public void Invencibilidad(){
+        StartCoroutine(InvencibilidadCoroutine());
+    }
+
+    IEnumerator InvencibilidadCoroutine(){
+        colision.enabled = false;
+
+        for (int i = 0; i < 6; i++){
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.25f);
+
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        colision.enabled = true;
+    }   
 
 }

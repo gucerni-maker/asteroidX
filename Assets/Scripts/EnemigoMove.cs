@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemigoMove : MonoBehaviour
 {
-    private float minSpeed = 1f;
-    private float maxSpeed = 3f;
+    private float minSpeed = 0.5f;
+    private float maxSpeed = 1.5f;
     public GameObject explosionEffect;
 
     Rigidbody2D rb;
@@ -33,6 +33,13 @@ public class EnemigoMove : MonoBehaviour
     //Se destruye la roca si colisiona con una bala
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.CompareTag("bala")){
+            
+            //Nos comunicamos con el gameManager
+            GameManager gm = FindFirstObjectByType<GameManager>();
+
+            //Le decimos al gameManager que anote un punto
+            gm.AnotaPunto();
+
             Destroy(gameObject);
             Instantiate(explosionEffect, transform.position, transform.rotation);
         }

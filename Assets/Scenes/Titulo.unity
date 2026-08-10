@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   uiDocument: {fileID: 1776442646}
+  nave: {fileID: 7263896736479516168, guid: dd3e89ed1ecfaf2e7bfe652335fb2148, type: 3}
 --- !u!4 &1236532529
 Transform:
   m_ObjectHideFlags: 0

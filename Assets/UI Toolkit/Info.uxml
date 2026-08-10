@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Puntaje 0" name="puntos" style="position: absolute; -unity-font-style: bold; font-size: 30px; color: rgb(255, 255, 255); width: 130px; -unity-text-align: upper-center; top: 4px; left: 7px; white-space: normal;"/>
+    <ui:Label text="Nivel 1" name="nivel" style="position: absolute; -unity-font-style: bold; font-size: 30px; color: rgb(255, 255, 255); width: 95px; -unity-text-align: upper-center; top: 4px; left: 309px; white-space: normal;"/>
+    <ui:Label text="Vidas 0" name="vidas" style="position: absolute; -unity-font-style: bold; font-size: 30px; color: rgb(255, 255, 255); width: 95px; -unity-text-align: upper-center; top: 4px; left: 606px; white-space: normal;"/>
+</ui:UXML>
