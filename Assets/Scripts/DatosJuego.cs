@@ -6,6 +6,7 @@ public class DatosJuego : MonoBehaviour
     public int puntaje = 0;
     public int vidas = 5;
     public int nivel = 1;
+    public int cantidadRocas = 1;
 
     //Para mantener los datos al pasar de nivel
     void Awake(){

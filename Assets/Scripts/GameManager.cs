@@ -41,14 +41,13 @@ public class GameManager : MonoBehaviour
             nivelText.text = "Nivel " + DatosJuego.Instance.nivel.ToString();
 
             creaNave();
-        }
 
+        }
     }
 
-    
     void Update()
     {
-        
+       
     }
 
     public void iniciarJuego(){
@@ -66,10 +65,19 @@ public class GameManager : MonoBehaviour
     public void AnotaPunto(){
         DatosJuego.Instance.puntaje+=10;
         scoreText.text = "Puntaje " + DatosJuego.Instance.puntaje.ToString();
+        DatosJuego.Instance.cantidadRocas--;
+        Debug.Log("rocas: " + DatosJuego.Instance.cantidadRocas);
         
+        //cada 150 puntos se da una vida
         if(DatosJuego.Instance.puntaje % 150 == 0){
             darVida();
         }
+
+        //si no hay rocas se pasa al final del juego
+        if(DatosJuego.Instance.cantidadRocas == 0){
+            FinDelJuego();
+        }
+
     }
 
     public void RestaVida(){
@@ -99,6 +107,10 @@ public class GameManager : MonoBehaviour
     IEnumerator SinVidas(){
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(2);//carga la pantalla de game over
+    }
+
+    public void FinDelJuego(){
+        SceneManager.LoadScene(3);
     }
 
 }
