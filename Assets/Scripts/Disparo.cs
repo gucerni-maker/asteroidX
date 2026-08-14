@@ -5,9 +5,9 @@ public class Disparo : MonoBehaviour
     public float velocidad = 15f;
     public GameObject rocaChica;
     public GameObject rocaMediana;
-    private Rigidbody2D rb;
-    private int cuentaRocas = 0;
 
+    private Rigidbody2D rb;
+ 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,17 +17,14 @@ public class Disparo : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(cuentaRocas);
+        
     }
 
     //Se destruye la bala ve si choca con una pared o roca
     void OnCollisionEnter2D(Collision2D collision){
 
         if (collision.gameObject.CompareTag("rocaChica")){
-            //cuentaRocas++;
             Destroy(gameObject);
-            
-
         }
         if (collision.gameObject.CompareTag("rocaMediana")){
             Destroy(gameObject);

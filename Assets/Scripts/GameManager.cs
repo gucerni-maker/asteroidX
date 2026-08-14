@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     private Button BotonStart;
     private Label scoreText, nivelText, vidasText;
 
+    public AudioClip sonidoRoca;//No olvidar agregar un componente Audio Source al prefab de la pelota (sin ninguna modificacion, es requerido para dar sonido)
+    public AudioClip sonidoNave;
+    private AudioSource playerAudio;
+
     void Start()
     {
         //Pantalla de titulo
@@ -42,6 +46,8 @@ public class GameManager : MonoBehaviour
 
             creaNave();
 
+            playerAudio = GetComponent<AudioSource>();
+
         }
     }
 
@@ -66,7 +72,7 @@ public class GameManager : MonoBehaviour
         DatosJuego.Instance.puntaje+=10;
         scoreText.text = "Puntaje " + DatosJuego.Instance.puntaje.ToString();
         DatosJuego.Instance.cantidadRocas--;
-        Debug.Log("rocas: " + DatosJuego.Instance.cantidadRocas);
+        playerAudio.PlayOneShot(sonidoRoca, 1.0f);
         
         //cada 150 puntos se da una vida
         if(DatosJuego.Instance.puntaje % 150 == 0){
@@ -82,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     public void RestaVida(){
         if (DatosJuego.Instance.vidas > 0){
+            playerAudio.PlayOneShot(sonidoNave, 1.0f);
             DatosJuego.Instance.vidas--;
             vidasText.text = "Vidas " + DatosJuego.Instance.vidas.ToString();
             StartCoroutine(EsperaElRespawn());

@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     private Collider2D colision;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    public AudioClip sonidoBala;
+    private AudioSource playerAudio;
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +23,7 @@ public class PlayerMove : MonoBehaviour
     }
     
     void Start(){
-
+        playerAudio = GetComponent<AudioSource>();
     }
 
     void Update(){
@@ -63,6 +65,7 @@ public class PlayerMove : MonoBehaviour
 
     //genera el disparo
     void Disparar(){
+        playerAudio.PlayOneShot(sonidoBala, 1.0f);
         Instantiate(balaPrefab, puntoDisparo.position, transform.rotation);
     }
 
