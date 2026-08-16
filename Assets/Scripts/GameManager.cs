@@ -8,52 +8,31 @@ public class GameManager : MonoBehaviour
     public UIDocument uiDocument;
     public GameObject nave;
     private GameObject naveActual;
-
     private Button BotonStart;
     private Label scoreText, nivelText, vidasText;
-
-    public AudioClip sonidoRoca;//No olvidar agregar un componente Audio Source al prefab de la pelota (sin ninguna modificacion, es requerido para dar sonido)
+    public AudioClip sonidoRoca;//No olvidar agregar un componente Audio Source
     public AudioClip sonidoNave;
     private AudioSource playerAudio;
-
+  
     void Start()
     {
         //Pantalla de titulo
         if(SceneManager.GetActiveScene().buildIndex == 0){
-            //Instanciamos los botones
             BotonStart = uiDocument.rootVisualElement.Q<Button>("Start");
-
-            //asociamos los botones a su respectiva funcion
             BotonStart.clicked += iniciarJuego;
-
         }    
         
         //Al iniciar el juego en el nivel 1
         if(SceneManager.GetActiveScene().buildIndex > 0){
-            //Instanciamos los labels
             scoreText = uiDocument.rootVisualElement.Q<Label>("puntos");
             nivelText = uiDocument.rootVisualElement.Q<Label>("nivel");
             vidasText = uiDocument.rootVisualElement.Q<Label>("vidas");
-
-            //Obtenemos el puntaje del almacenamiento
             scoreText.text = "Puntaje " + DatosJuego.Instance.puntaje.ToString();
-
-            //Obtenemos las vidas restantes del almacenamiento
             vidasText.text = "Vidas " + DatosJuego.Instance.vidas.ToString();
-
-            //Obtenemos el nivel del almacenamiento
             nivelText.text = "Nivel " + DatosJuego.Instance.nivel.ToString();
-
             creaNave();
-
             playerAudio = GetComponent<AudioSource>();
-
         }
-    }
-
-    void Update()
-    {
-       
     }
 
     public void iniciarJuego(){
@@ -71,19 +50,35 @@ public class GameManager : MonoBehaviour
     public void AnotaPunto(){
         DatosJuego.Instance.puntaje+=10;
         scoreText.text = "Puntaje " + DatosJuego.Instance.puntaje.ToString();
-        DatosJuego.Instance.cantidadRocas--;
         playerAudio.PlayOneShot(sonidoRoca, 1.0f);
         
         //cada 150 puntos se da una vida
         if(DatosJuego.Instance.puntaje % 150 == 0){
             darVida();
         }
+    }    
 
-        //si no hay rocas se pasa al final del juego
-        if(DatosJuego.Instance.cantidadRocas == 0){
+    public void ComprobarRocasDespues(){
+        StartCoroutine(EsperarYComprobarRocas());
+    }
+
+    private IEnumerator EsperarYComprobarRocas(){
+        yield return null;
+        ComprobarRocas();
+    }
+
+    public void ComprobarRocas(){
+        int chicas = GameObject.FindGameObjectsWithTag("rocaChica").Length;
+        int medianas = GameObject.FindGameObjectsWithTag("rocaMediana").Length;
+        int grandes = GameObject.FindGameObjectsWithTag("rocaGrande").Length;
+        int rocasActuales = chicas + medianas + grandes;
+        Debug.Log("Rocas chicas: " + chicas);
+        Debug.Log("Rocas medianas: " + medianas);
+        Debug.Log("Rocas grandes: " + grandes);
+        Debug.Log("Rocas actuales: " + rocasActuales);
+        if (rocasActuales == 0){
             FinDelJuego();
         }
-
     }
 
     public void RestaVida(){
@@ -119,5 +114,4 @@ public class GameManager : MonoBehaviour
     public void FinDelJuego(){
         SceneManager.LoadScene(3);
     }
-
 }

@@ -30,7 +30,7 @@ public class EnemigoMove : MonoBehaviour
         rb.linearVelocity = direccion * randomSpeed;
     }
 
-    //Se destruye la roca si colisiona con una bala
+    //Se genera puntaje
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.CompareTag("bala")){
             
@@ -39,6 +39,7 @@ public class EnemigoMove : MonoBehaviour
 
             //Le decimos al gameManager que anote un punto
             gm.AnotaPunto();
+            //gm.ComprobarRocas();
 
             Destroy(gameObject);
             Instantiate(explosionEffect, transform.position, transform.rotation);

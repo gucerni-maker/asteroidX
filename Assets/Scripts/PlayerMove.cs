@@ -9,7 +9,14 @@ public class PlayerMove : MonoBehaviour
     public float velocidadRotacion = 200f;
     public GameObject explosionEffect;
     public GameObject balaPrefab;
+    public GameObject balaPrefab3;
     public Transform puntoDisparo;
+    public Transform puntoDisparo2;
+    public Transform puntoDisparo3;
+    public bool tieneGemaGun = false;
+    public GameObject aroFuerza;
+    private GameObject escudoActual;
+
     private Collider2D colision;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -35,6 +42,7 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             Disparar();
         }
+
     }
 
     void FixedUpdate(){
@@ -66,7 +74,15 @@ public class PlayerMove : MonoBehaviour
     //genera el disparo
     void Disparar(){
         playerAudio.PlayOneShot(sonidoBala, 1.0f);
-        Instantiate(balaPrefab, puntoDisparo.position, transform.rotation);
+        
+        if(tieneGemaGun){
+            Instantiate(balaPrefab, puntoDisparo.position, transform.rotation);
+            Instantiate(balaPrefab, puntoDisparo2.position, transform.rotation);
+            Instantiate(balaPrefab, puntoDisparo3.position, transform.rotation);
+        }
+        else{
+            Instantiate(balaPrefab, puntoDisparo.position, transform.rotation);
+        }
     }
 
     public void Invencibilidad(){
@@ -85,6 +101,34 @@ public class PlayerMove : MonoBehaviour
         }
 
         colision.enabled = true;
-    }   
+    }
 
+    //Controla los powerup
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("gemaEscudo")){
+            escudoActual = Instantiate(aroFuerza, transform);
+            escudoActual.transform.localPosition = Vector3.zero;
+            escudoActual.transform.localRotation = Quaternion.identity;
+            Destroy(other.gameObject);
+            StartCoroutine(DestruyeEscudo());
+            
+        }
+        if(other.CompareTag("gemaGun")){
+            tieneGemaGun = true;
+            StartCoroutine(BalaNormal());
+            Destroy(other.gameObject);
+        }
+    } 
+
+    //Destruye el escudo (powerup)
+    IEnumerator DestruyeEscudo(){
+        yield return new WaitForSeconds(15f);
+        Destroy(escudoActual);
+    } 
+
+    //vuelve a la bala normal (powerup)
+        IEnumerator BalaNormal(){
+        yield return new WaitForSeconds(10f);
+        tieneGemaGun = false;
+    } 
 }
